@@ -32,4 +32,28 @@ describe("Event Service",()=> {
         let eventService = new EventService(new EventRepository());
         expect(eventService.getEvents().length).toBe(3);
     })
+
+    test('getFirstEvent shall call only first', async () => {
+        let eventService = new EventService(new EventRepository());
+        expect(eventService.getFirstEvent()).toEqual(fakeEvents[1]);
+    })
+
+    test('getLastEvent shall call only last', async () => {
+        let eventService = new EventService(new EventRepository());
+        expect(eventService.getLastEvent()).toEqual(fakeEvents[2]);
+    })
+
+    test('getLongestEvent shall call only longest', async () => {
+        let eventService = new EventService(new EventRepository());
+        expect(eventService.getLongestEvent()).toEqual(fakeEvents[1]);
+    })
+    test('getShortestEvent shall call only shortest', async () => {
+        let eventService = new EventService(new EventRepository());
+        expect(eventService.getShortestEvent()).toEqual(fakeEvents[2]);
+    })
+    test('hasEventOn shall call the event on while a given time', async () =>{
+        let eventService = new EventService(new EventRepository());
+        expect(eventService.hasEventOn(new Date('2019-12-17T03:25:00'))).toStrictEqual([new Event(new Date('2019-12-17T03:24:00'),new Date('2019-12-17T13:24:00'),"Hello World","Campus Numerique","This is an hello world..")]);
+        expect(eventService.hasEventOn(new Date('2019-12-17T03:23:00'))).toStrictEqual([]);
+    })
 });
