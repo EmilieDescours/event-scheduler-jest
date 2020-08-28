@@ -28,10 +28,13 @@ export default class EventService {
 
     /**
      * Get the first upcomming event
-     * @return {null | Event}
+     * @return {this}
      */
     getFirstEvent() {
-        return null; //TODO
+        let listEvent = this.getEvents();
+        const sortedEvent = listEvent.sort((a,b)=> (a.startTime - b.endTime));
+        console.log(sortedEvent);
+        return sortedEvent[0]; //TODO
     }
 
     /**
@@ -39,7 +42,10 @@ export default class EventService {
      * @return {null | Event}
      */
     getLastEvent() {
-        return null; //TODO
+        let listEvent = this.getEvents();
+        const sortedEvent = listEvent.sort((a,b)=> (b.startTime - a.endTime));
+        console.log(sortedEvent);
+        return sortedEvent[2]; //TODO
     }
 
     /**
